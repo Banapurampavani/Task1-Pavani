@@ -1,0 +1,209 @@
+
+mysql> create database Pavani;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use Pavani;
+Database changed
+mysql> create table emp(eid int(5),ename varchar(15),dept varchar(10),phonenumber int(15));
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> desc emp;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| eid         | int(5)      | YES  |     | NULL    |       |
+| ename       | varchar(15) | YES  |     | NULL    |       |
+| dept        | varchar(10) | YES  |     | NULL    |       |
+| phonenumber | int(15)     | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.53 sec)
+
+mysql> insert into emp(eid,ename,dept,phonenumber)values(21,'Raju','second',769342);
+Query OK, 1 row affected (0.93 sec)
+
+mysql> insert into emp(eid,ename,dept,phonenumber)values(22,'Sandy','first',95150);
+Query OK, 1 row affected (0.40 sec)
+
+mysql> insert into emp(eid,ename,dept,phonenumber)values(23,'Lucky','first',898555);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into emp(eid,ename,dept,phonenumber)values(24,'Vinod','second',99635);
+Query OK, 1 row affected (0.70 sec)
+
+mysql> insert into emp(eid,ename,dept,phonenumber)values(25,'Sai','first',920575);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select *from emp;
++------+-------+--------+-------------+
+| eid  | ename | dept   | phonenumber |
++------+-------+--------+-------------+
+|   21 | Raju  | second |      769342 |
+|   22 | Sandy | first  |       95150 |
+|   23 | Lucky | first  |      898555 |
+|   24 | Vinod | second |       99635 |
+|   25 | Sai   | first  |      920575 |
++------+-------+--------+-------------+
+5 rows in set (0.19 sec)
+
+mysql> update emp SET phonenumber='951500' WHERE eid=22;
+Query OK, 1 row affected (2.28 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from emp;
++------+-------+--------+-------------+
+| eid  | ename | dept   | phonenumber |
++------+-------+--------+-------------+
+|   21 | Raju  | second |      769342 |
+|   22 | Sandy | first  |      951500 |
+|   23 | Lucky | first  |      898555 |
+|   24 | Vinod | second |       99635 |
+|   25 | Sai   | first  |      920575 |
++------+-------+--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> update emp SET phonenumber='996353' WHERE eid=24;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from emp;
++------+-------+--------+-------------+
+| eid  | ename | dept   | phonenumber |
++------+-------+--------+-------------+
+|   21 | Raju  | second |      769342 |
+|   22 | Sandy | first  |      951500 |
+|   23 | Lucky | first  |      898555 |
+|   24 | Vinod | second |      996353 |
+|   25 | Sai   | first  |      920575 |
++------+-------+--------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE emp ADD Age int(10);
+Query OK, 5 rows affected (0.60 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from emp;
++------+-------+--------+-------------+------+
+| eid  | ename | dept   | phonenumber | Age  |
++------+-------+--------+-------------+------+
+|   21 | Raju  | second |      769342 | NULL |
+|   22 | Sandy | first  |      951500 | NULL |
+|   23 | Lucky | first  |      898555 | NULL |
+|   24 | Vinod | second |      996353 | NULL |
+|   25 | Sai   | first  |      920575 | NULL |
++------+-------+--------+-------------+------+
+5 rows in set (0.00 sec)
+
+mysql> rename table emp to employee;
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select *from employee;
++------+-------+--------+-------------+------+
+| eid  | ename | dept   | phonenumber | Age  |
++------+-------+--------+-------------+------+
+|   21 | Raju  | second |      769342 | NULL |
+|   22 | Sandy | first  |      951500 | NULL |
+|   23 | Lucky | first  |      898555 | NULL |
+|   24 | Vinod | second |      996353 | NULL |
+|   25 | Sai   | first  |      920575 | NULL |
++------+-------+--------+-------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select *from emp;
+ERROR 1146 (42S02): Table 'pavani.emp' doesn't exist
+mysql> select *from employee;
++------+-------+--------+-------------+------+
+| eid  | ename | dept   | phonenumber | Age  |
++------+-------+--------+-------------+------+
+|   21 | Raju  | second |      769342 | NULL |
+|   22 | Sandy | first  |      951500 | NULL |
+|   23 | Lucky | first  |      898555 | NULL |
+|   24 | Vinod | second |      996353 | NULL |
+|   25 | Sai   | first  |      920575 | NULL |
++------+-------+--------+-------------+------+
+5 rows in set (0.00 sec)
+mysql> SELECT User, Host FROM mysql.user;
++------+-----------+
+| User | Host      |
++------+-----------+
+|      | %         |
+| root | %         |
+|      | localhost |
+| root | localhost |
++------+-----------+
+4 rows in set (0.26 sec)
+
+mysql> CREATE USER 'Raju'@'localhost' IDENTIFIED BY '12345';
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> GRANT ALL PRIVILEGES ON * . * TO 'Raju'@'localhost';
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> SHOW GRANTS FOR 'Raju'@'localhost';
++----------------------------------------------------------------------------------------------------------------------+
+| Grants for Raju@localhost                                                                                            |
++----------------------------------------------------------------------------------------------------------------------+
+| GRANT ALL PRIVILEGES ON *.* TO 'Raju'@'localhost' IDENTIFIED BY PASSWORD '*00A51F3F48415C7D4E8908980D443C29C69B60C9' |
++----------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
